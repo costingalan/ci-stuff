@@ -4,23 +4,23 @@
 # License: Apache v2.0
 # Testing network connectivity
 
-LOGFILE=$(echo "$(date +%D -u).log" | sed 's:/:-:g')
-HOSTFILE=hosts.txt
+logfile=$(echo "$(date +%D -u).log" | sed 's:/:-:g')
+hostfile=hosts.txt
 
-for line in `cat $HOSTFILE`
+for line in `cat $hostfile`
 do
-  MAC=`echo $line | awk -F'|' '{print $2}' `
-  HOST=`echo $line | awk -F'|' '{print $1}' `
+  mac="$(echo $line | awk -F'|' '{print $2}')"
+  host="$(echo $line | awk -F'|' '{print $1}')"
    
-  mkdir -p $HOST/$MAC
+  mkdir -p $host/$mac
 
-  [[ "$MAC" =~ "/(([0-9A-Fa-f]{2}[-:]){5}[0-9A-Fa-f]{2})|(([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4}|([0-9A-Fa-f]{12}))/ig" ]] && OK=1 || OK=0 #testing MAC 
+  [[ "$mac" =~ "/(([0-9A-Fa-f]{2}[-:]){5}[0-9A-Fa-f]{2})|(([0-9A-Fa-f]{4}\.){2}[0-9A-Fa-f]{4}|([0-9A-Fa-f]{12}))/ig" ]] && ok=1 || ok=0 #testing MAC 
 
-  if [[ OK==1 ]]
+  if [[ ok==1 ]]
     then
-      echo "Time: $(date +%H:%M -u) Details: `sudo macping $MAC -c 5 2>/dev/null | grep "5 packets"` " >> $HOST/$MAC/$LOGFILE
+      echo "Time: $(date +%H:%M -u) Details: `sudo macping $mac -c 5 2>/dev/null | grep "5 packets"` " >> $host/$mac/$logfile
     else
-      echo "The MAC: $MAC for HOST: $HOST is INVALID"
+      echo "The MAC: $mac for HOST: $host is INVALID"
   fi 
 
 done
