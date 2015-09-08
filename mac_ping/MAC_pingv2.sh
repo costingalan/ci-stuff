@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Author: cgalan@cloudbasesolutions.com
+# License: Apache v2.0
+# Testing network connectivity
+
 LOGFILE=$(echo "$(date +%D -u).log" | sed 's:/:-:g')
 HOSTFILE=hosts.txt
 
