@@ -17,19 +17,21 @@ if [[ $# != 1 ]]; then
   exit 1;
 fi
 
-LOGFILE=$1
-if [[ ! -f $LOGFILE ]]; then
-  echo "$LOGFILE does not exist"
+logfile="$1"
+if [[ ! -f $logfile ]]; then
+  echo "$logfile does not exist"
   exit 2;
 fi
 
 case "${create_logfile}" in
   Y)
-    echo "Creating $LOGFILE for results"
-    touch $LOGFILE
-    N)
+    echo "Creating $logfile for results"
+    touch "$logfile"
+    ;;
+  N)
     echo "Please create the logfile and run the script again."
     echo "Exiting"
     exit 3;
+    ;;
 
 esac
