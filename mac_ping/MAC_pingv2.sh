@@ -14,6 +14,6 @@ do
    
   mkdir -p "$host/$mac"
 
-  echo "Time: $(date +%H:%M -u) Details: $(sudo macping "$mac" -c 5 2>/dev/null | grep "5 packets") " >> "$host/$mac/$logfile"
+  echo "Time: $(date +%H:%M:%S -u) Details: $(sudo macping "$mac" -c 5 2>/dev/null | grep "5 packets") " >> "$host/$mac/$logfile"
 
 done
